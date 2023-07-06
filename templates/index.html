@@ -4,26 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APP</title>
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
 </head>
 <body>
-  <h1>APP</h1>
-  <div id="counter"></div>
-  
-  <script>
-    var eventSource = new EventSource("/listen")
-    
-    eventSource.addEventListener("message", function(e) {
-      console.log(e.data)
-    }, false)
-
-    eventSource.addEventListener("online", function(e) {
-      // console.log(e.data.color)
-      data = JSON.parse(e.data)
-      document.querySelector("#counter").innerText = data.counter
-      document.querySelector("body").style.backgroundColor= data.color
-    }, true)
-
-  </script>
+  <h1>htmx hx-sse</h1>
+  <p>See <a href="https://htmx.org/attributes/hx-sse/">https://htmx.org/attributes/hx-sse/</a></p>
+<div hx-sse="connect:/listen swap:online">
+  ...
+</div>
 
 </body>
 </html>
