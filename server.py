@@ -3,6 +3,8 @@ from flask import Flask, Response, render_template, stream_with_context
 from gevent.pywsgi import WSGIServer
 import json
 import time
+import os
+
 
 app = Flask(__name__)
 counter = 100
@@ -19,9 +21,12 @@ def listen():
   def respond_to_client():
     while True:
       global counter
-      with open("color.txt", "r") as f:
-        color = f.read()
-        print("******************")
+      color = "red"
+      #document_path = os.getcwd() + 'color.txt'
+      # document = open(document_path, 'r')
+      #with open(document_path, "r") as f:
+        # color = f.read()
+        # print("******************")
       if(color != "white"):
         print(counter)
         counter += 1
@@ -34,7 +39,7 @@ def listen():
 ##############################
 if __name__ == "__main__":
   # app.run(port=80, debug=True)
-  http_server = WSGIServer(("localhost", 80), app)
+  http_server = WSGIServer(("127.0.0.1", 5007), app)
   http_server.serve_forever()
 
 
